@@ -25,7 +25,7 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 $ cd distribution-management-system-backend
 $ npm install
-$ node app.js
+$ npm start
 ```
 
  
