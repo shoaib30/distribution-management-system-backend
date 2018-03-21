@@ -1,5 +1,5 @@
 # Distribution Management System Backend
----
+
 
 A system developed to keep track of ration distribution for The United Foundation (TUF) 
 
@@ -7,7 +7,7 @@ Each token is labeled with a QR code which is assigned to the beneficiaries. Thi
 
 The source code for the companion app can be found on [TUF Distribution App](https://www.github.com)
 
----
+
 ## Tech 
 * [MySQL] - MySQL Database
 * [Express] - fast node.js network app framework
