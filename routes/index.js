@@ -93,6 +93,10 @@ router.put('/update-status', function (req, res, next) {
       res.status(404);
       res.end('Token Not Found');
     }
+    if(beneficiary.status){
+      res.status(406);
+      res.end('Token Already Tagged')
+    }
     Beneficiary.update({
         status: true
       }, {
