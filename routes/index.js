@@ -1,21 +1,33 @@
 var express = require('express');
 var router = express.Router();
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'sqlite',
-  operatorsAliases: false,
 
+// const sequelize = new Sequelize('database', 'username', 'password', {
+//   host: 'localhost',
+//   dialect: 'sqlite',
+//   operatorsAliases: false,
+
+//   pool: {
+//     max: 5,
+//     min: 0,
+//     acquire: 30000,
+//     idle: 10000
+//   },
+
+//   // SQLite only
+//   storage: 'data.db'
+// });
+
+
+const sequelize = new Sequelize(process.env.MYSQL_URL, {
   pool: {
     max: 5,
     min: 0,
     acquire: 30000,
     idle: 10000
-  },
-
-  // SQLite only
-  storage: 'data.db'
+  }
 });
+
 
 sequelize
   .authenticate()
