@@ -7,9 +7,9 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var cors = require('cors');
 
 var app = express();
-
 
 
 // view engine setup
@@ -25,6 +25,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors());
 
 app.use('/', index);
 app.use('/users', users);

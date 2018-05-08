@@ -72,11 +72,14 @@ router.get('/', function (req, res, next) {
 */
 router.post('/load-data', function (req, res, next) {
   var benData = req.body;
-
-  for (i in benData) {
-    var beneficiary = benData[i]
-    Beneficiary.create(beneficiary)
+  var responseMessage = {status: false, messsage: ''}
+  for (var i in benData) {
+    var beneficiary = benData[i];
+    
+    Beneficiary.create(beneficiary);
   }
+  responseMessage.status = true
+  responseMessage.messsage = 'data stored'
   res.send('data stored');
 });
 
@@ -88,14 +91,19 @@ router.get('/all-data', function (req, res, next) {
 
 router.put('/update-status', function (req, res, next) {
   var tokenId = req.query.tokenId;
+  var responseMessage = {status:false , message: ''}
   Beneficiary.findById(tokenId).then(beneficiary => {
     if (beneficiary == null) {
       res.status(404);
-      res.end('Token Not Found');
+      responseMessage.status = false;
+      responseMessage.message = 'Token Not Found'
+      res.end(JSON.stringify(responseMessage));
     }
-    if(beneficiary.status){
+    if (beneficiary.status) {
       res.status(406);
-      res.end('Token Already Tagged')
+      responseMessage.status = false;
+      responseMessage.message = 'Token Already Tagged'
+      res.end(JSON.stringify(responseMessage));
     }
     Beneficiary.update({
         status: true
@@ -105,7 +113,9 @@ router.put('/update-status', function (req, res, next) {
         }
       })
       .then(() => {
-        res.end('Token Updated');
+        responseMessage.status = true;
+        responseMessage.message = 'Token Updated'
+        res.end(JSON.stringify(responseMessage));
       });
   });
 });
