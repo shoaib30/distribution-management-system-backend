@@ -80,7 +80,7 @@ router.post('/load-data', function (req, res, next) {
   }
   responseMessage.status = true
   responseMessage.messsage = 'data stored'
-  res.send('data stored');
+  res.send(JSON.stringify(responseMessage));
 });
 
 router.get('/all-data', function (req, res, next) {
