@@ -76,11 +76,19 @@ router.post('/load-data', function (req, res, next) {
   for (var i in benData) {
     var beneficiary = benData[i];
     
-    Beneficiary.create(beneficiary);
+    Beneficiary.create(beneficiary).then(op => {
+      responseMessage.status = true
+      responseMessage.messsage = 'data stored'
+      res.end(JSON.stringify(responseMessage));
+    }).catch(err => {
+      // console.log(err)
+      res.status(406)
+      responseMessage.status = false
+      responseMessage.messsage = err.name
+      res.end(JSON.stringify(responseMessage));
+    });
   }
-  responseMessage.status = true
-  responseMessage.messsage = 'data stored'
-  res.send(JSON.stringify(responseMessage));
+  
 });
 
 router.get('/all-data', function (req, res, next) {
