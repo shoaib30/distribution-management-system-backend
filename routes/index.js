@@ -75,13 +75,13 @@ router.post('/load-data', function (req, res, next) {
   var responseMessage = {status: false, messsage: ''}
   for (var i in benData) {
     var beneficiary = benData[i];
-    beneficiary = beneficiary.tokenId.replace(' ', '').toUpperCase()
+    beneficiary.tokenId = beneficiary.tokenId.replace(' ', '').toUpperCase()
     Beneficiary.create(beneficiary).then(op => {
       responseMessage.status = true
       responseMessage.messsage = 'data stored'
       res.end(JSON.stringify(responseMessage));
     }).catch(err => {
-      // console.log(err)
+      console.log(err)
       res.status(406)
       responseMessage.status = false
       responseMessage.messsage = err.name
