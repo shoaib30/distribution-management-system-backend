@@ -75,7 +75,7 @@ router.post('/load-data', function (req, res, next) {
   var responseMessage = {status: false, messsage: ''}
   for (var i in benData) {
     var beneficiary = benData[i];
-    
+    beneficiary = beneficiary.replace(' ', '').toUpperCase()
     Beneficiary.create(beneficiary).then(op => {
       responseMessage.status = true
       responseMessage.messsage = 'data stored'
