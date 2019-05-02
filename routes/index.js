@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Sequelize = require('sequelize');
 
+
 // const sequelize = new Sequelize('database', 'username', 'password', {
 //   host: 'localhost',
 //   dialect: 'sqlite',
@@ -19,7 +20,7 @@ const Sequelize = require('sequelize');
 // });
 
 
-const sequelize = new Sequelize(process.env.MYSQLCONNSTR_DBSTRING, {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   pool: {
     max: 5,
     min: 0,
